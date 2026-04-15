@@ -137,6 +137,7 @@ button:disabled {
 
 .stat-card,
 .subpanel,
+.cell,
 .test-item {
   border: 1px solid #e2e8f0;
   background: #ffffff;
@@ -281,7 +282,6 @@ button:disabled {
 
 .cell {
   padding: 10px;
-  background: transparent;
   overflow-wrap: anywhere;
 }
 
