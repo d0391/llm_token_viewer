@@ -65,11 +65,6 @@ function escapeForCopy(value: string): string {
   return value.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/\t/g, '\\t').replace(/\r/g, '\\r');
 }
 
-function tokenTint(index: number, total: number): string {
-  const hue = Math.round((index / Math.max(total, 1)) * 360);
-  return `hsl(${hue} 85% 92%)`;
-}
-
 function reconstructText(tokens: TokenRecord[]): string {
   return tokens.map((token) => token.text).join('');
 }
@@ -204,13 +199,7 @@ export default function App() {
             </div>
             <div className="token-chip-wrap">
               {tokens.length === 0 ? <span className="empty-state">No tokens yet.</span> : tokens.map((token, idx) => (
-                <span
-                  key={`${token.id}-${idx}`}
-                  className="token-chip"
-                  style={{ backgroundColor: tokenTint(idx, tokens.length) }}
-                >
-                  {printable(token.text)}
-                </span>
+                <span key={`${token.id}-${idx}`} className="token-chip">{printable(token.text)}</span>
               ))}
             </div>
           </div>
@@ -270,11 +259,7 @@ export default function App() {
               <div className="empty-table">No matching tokens.</div>
             ) : (
               filteredTokens.map((token, idx) => (
-                <div
-                  className="token-grid token-grid-row"
-                  key={`${token.id}-${token.start}-${idx}`}
-                  style={{ backgroundColor: tokenTint(idx, filteredTokens.length) }}
-                >
+                <div className="token-grid token-grid-row" key={`${token.id}-${token.start}-${idx}`}>
                   <div className="cell mono">{token.id}</div>
                   <div className="cell mono">{printable(token.text)}</div>
                   <div className="cell mono">{token.bytesHex || '∅'}</div>
